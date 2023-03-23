@@ -1,3 +1,12 @@
+from typing import List, Optional
+from pydantic import BaseModel
+
+class Chapter(BaseModel):
+    _id : str
+    name: str
+    text: str
+    rating : Optional[float]
+
 class Course(BaseModel):
     _id : str
     name: str
@@ -5,10 +14,3 @@ class Course(BaseModel):
     description: str
     domain: List[str]
     chapters: List[Chapter]
-
-
-class Chapter(BaseModel):
-    _id : str
-    name: str
-    text: str
-    rating : Optional[float]

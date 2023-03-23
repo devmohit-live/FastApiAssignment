@@ -1,12 +1,30 @@
 from typing import List, Optional
 from pydantic import BaseModel
 
+
+class ChapterRequestDto(BaseModel):
+    name: str
+    text: str
+    rating : Optional[float]
+
+class ChapterRatingRequest(BaseModel):
+    user_id : str
+    course_id : str
+    chapter_id : str
+    rating: bool  # True for positive, False for negative
+
+class ChapterResponse(BaseModel):
+    name: str
+    text: str
+    rating: Optional[float]
+    num_ratings: int
+
 class CourseRequestDto(BaseModel):
     name: str
     date: int
     description: str
     domain: List[str]
-    chapters: List[Chapter]
+    chapters: List[ChapterRequestDto]
 
 
 class CourseResponseDto(BaseModel):
@@ -15,7 +33,7 @@ class CourseResponseDto(BaseModel):
     date: int
     description: str
     domain: List[str]
-    chapters: List[Chapter]
+    chapters: List[ChapterRequestDto]
 
 
 class CourseListFilter(BaseModel):
@@ -27,11 +45,11 @@ class CourseListSort(BaseModel):
 
 
 class CourseList(BaseModel):
-    courses: List[Course]
+    courses: List[CourseRequestDto]
 
 
 class CourseListResponse(BaseModel):
-    courses: List[Course]
+    courses: List[CourseRequestDto]
     count: int
 
 
