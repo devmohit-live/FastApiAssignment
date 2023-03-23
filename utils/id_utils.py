@@ -13,5 +13,5 @@ def get_chapter_id(course_id: str) -> str:
 
 
 def get_rating_id(chapter_id:str)->str:
-    id = 'CR'+get_chapter_id(alphabet_set, 12)
+    id = 'CR'+generate(alphabet_set, 12)
     return str(id)

@@ -50,7 +50,8 @@ def get_chapter_by_id(course_id, chapter_id):
 
 
 def add_chapter_rating(chapter_rating: ChapterRating):
-    chapter_rating_collection.insert_one(dict(chapter_rating))
+    response = chapter_rating_collection.insert_one(dict(chapter_rating))
+    return response.inserted_id
 
 
 def get_chapter_ratings(chapter_id):

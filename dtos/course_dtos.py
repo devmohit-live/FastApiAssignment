@@ -6,9 +6,8 @@ class ChapterRequestDto(BaseModel):
     name: str
     text: str
 
-class ChapterRatingRequest(BaseModel):
+class ChapterRatingRequestDto(BaseModel):
     user_id : str
-    course_id : str
     chapter_id : str
     rating: bool  # True for positive, False for negative
 

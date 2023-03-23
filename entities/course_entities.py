@@ -15,6 +15,7 @@ class Course(BaseModel):
     chapters: List[Chapter]
 
 class ChapterRating(BaseModel):
+    _id : str
     user_id : str
     course_id : str
     chapter_id : str
