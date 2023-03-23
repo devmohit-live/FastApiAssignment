@@ -7,7 +7,7 @@
 
 
 ```bash
-
-python3 -n uvicorn controllers.course_controller:app --reload
+python3 utils/load_data_utils.py
+python3 -m uvicorn controllers.course_controller:app --reload
 
 ```

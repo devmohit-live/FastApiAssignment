@@ -5,7 +5,6 @@ from pydantic import BaseModel
 class ChapterRequestDto(BaseModel):
     name: str
     text: str
-    rating : Optional[float]
 
 class ChapterRatingRequest(BaseModel):
     user_id : str

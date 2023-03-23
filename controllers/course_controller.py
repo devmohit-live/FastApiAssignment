@@ -6,10 +6,6 @@ from repository.course_repository import *
 from repository.course_repository import *
 app = FastAPI()
 
-#add course
-@app.post("/courses")
-async def add_course(course : Course) -> str:
-    return add_course(course)
 
 
 #Get all courses
@@ -43,12 +39,17 @@ async def get_chapter_overview(course_id: str, chapter_id: str):
         return None
     ratings = get_chapter_ratings(chapter_id);
     no_of_ratings = len(ratings)
-    rating_sum = 0
-    for rating in ratings:
-        if dict(rating).get('rating') == True :
-            rating_sum = rating_sum + 1
 
-    avg_rating = (rating_sum / no_of_ratings)
+    if no_of_ratings == 0:
+        avg_rating = 0
+    else:
+        rating_sum = 0
+        for rating in ratings:
+            if dict(rating).get('rating') == True :
+                rating_sum = rating_sum + 1
+
+        avg_rating = (rating_sum / no_of_ratings)
+
     chapter = dict(chapter)
     return { "name": chapter.get('name'),
              "text": chapter.get('text'),
@@ -61,9 +62,7 @@ async def get_chapter_overview(course_id: str, chapter_id: str):
 @app.post("/courses/{course_id}/rate_chapter/")
 def rate_chapter(course_id : str, rating_req: ChapterRatingRequest):
     # check if the course exists
-    print("Req is", rating_req, "Course id is ", course_id)
     chapter = get_chapter_by_id(course_id, rating_req.chapter_id)
-    print("Chapter  is ", chapter)
     if chapter == None:
         raise HTTPException(status_code=404, detail="Course not found")
     rating_req

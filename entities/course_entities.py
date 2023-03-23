@@ -5,7 +5,6 @@ class Chapter(BaseModel):
     _id : str
     name: str
     text: str
-    rating : Optional[float]
 
 class Course(BaseModel):
     _id : str
@@ -14,3 +13,9 @@ class Course(BaseModel):
     description: str
     domain: List[str]
     chapters: List[Chapter]
+
+class ChapterRating(BaseModel):
+    user_id : str
+    course_id : str
+    chapter_id : str
+    rating: bool

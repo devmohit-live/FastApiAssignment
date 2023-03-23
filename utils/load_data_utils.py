@@ -1,7 +1,7 @@
 import os
 import json
 from datetime import datetime
-from pymongo import MongoClient
+from pymongo import MongoClient, ASCENDING
 from providers_utils import get_mongo_client
 from id_utils import *
 
@@ -24,10 +24,10 @@ for item in data:
 
 # Connect to MongoDB and insert the items
 client = get_mongo_client()
-db = client['courseMDb']
+db = client['courseDb']
 collection = db['courses']
 # Adding index
-course_collection.create_index([("chapters._id", pymongo.ASCENDING)])
+collection.create_index([("chapters._id",ASCENDING)])
 collection.insert_many(data)
 
 # Close the MongoDB connection
